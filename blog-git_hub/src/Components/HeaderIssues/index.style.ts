@@ -29,6 +29,21 @@ export const Container = styled.div`
       gap: 0.5rem;
 
       cursor: pointer;
+
+      p {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 160%;
+        color: ${({ theme }) => theme.blue};
+
+        text-transform: uppercase;
+
+        a {
+          text-decoration: none;
+          color: ${({ theme }) => theme.blue};
+        }
+      }
     }
   }
   strong {

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const Container = styled(Link)`
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
-  width: 100%;
+  width: 25.125rem;
   height: 16.25rem;
   text-decoration: none;
 

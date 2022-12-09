@@ -1,13 +1,25 @@
+import { IPost } from "../../pages/Home";
+import { Spinner } from "../Loading";
 import { Post } from "../Post";
-import { Container } from "./index.style";
-
-export function PostsListContainer() {
+import { Container, ContainerSpiner } from "./index.style";
+type Props = {
+  posts: IPost[];
+  isLoading: boolean;
+};
+export function PostsListContainer({ posts, isLoading }: Props) {
   return (
-    <Container>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-    </Container>
+    <>
+      {isLoading ? (
+        <ContainerSpiner>
+          <Spinner />
+        </ContainerSpiner>
+      ) : (
+        <Container>
+          {posts.map((item) => (
+            <Post key={item.number} item={item} />
+          ))}
+        </Container>
+      )}
+    </>
   );
 }

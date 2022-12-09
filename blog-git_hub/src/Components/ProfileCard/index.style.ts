@@ -44,6 +44,16 @@ export const HeaderProfile = styled.header`
     flex-direction: row;
     align-items: center;
     gap: 8px;
+
+    p {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 160%;
+      color: ${({ theme }) => theme.blue};
+
+      text-transform: uppercase;
+    }
   }
 `;
 export const DescriptionProfile = styled.p`
