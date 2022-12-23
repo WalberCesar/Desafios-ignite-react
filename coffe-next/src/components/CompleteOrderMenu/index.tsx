@@ -1,10 +1,15 @@
+import { ShoppingCartSimple } from "phosphor-react";
 import { ProductProps } from "../../contexts/types";
 import { useCart } from "../../contexts/useCartContext";
 import CardCoffeSelected from "../CardCoffeSelected";
-import { ContainerCompleteOrderMenu, ContainerTotalPrice } from "./index.style";
+import {
+  ContainerCompleteOrderMenu,
+  ContainerNotExistsCoffeInCart,
+  ContainerTotalPrice,
+} from "./index.style";
 
 export default function CompleteOrderMenu() {
-  const { cartList } = useCart();
+  const { cartList, quantityItemsInCart } = useCart();
   const priceFrete = cartList.length > 0 ? 3.5 : 0;
   const FormatedPriceFrete = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -27,8 +32,6 @@ export default function CompleteOrderMenu() {
     currency: "BRL",
   }).format(priceTotalItems + priceFrete);
 
-  const quantityItemsInCart = cartList.length;
-
   return (
     <ContainerCompleteOrderMenu>
       {cartList.map((item) => (
@@ -37,6 +40,13 @@ export default function CompleteOrderMenu() {
           coffe={item as ProductProps}
         />
       ))}
+
+      {quantityItemsInCart === 0 && (
+        <ContainerNotExistsCoffeInCart>
+          <h1>Seu carrinho esta vazio!</h1>
+          <ShoppingCartSimple size={40} />
+        </ContainerNotExistsCoffeInCart>
+      )}
 
       <footer>
         <ContainerTotalPrice>

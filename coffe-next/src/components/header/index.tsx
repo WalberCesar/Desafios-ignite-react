@@ -15,8 +15,7 @@ import { ComponentProps } from "@stitches/react";
 type Props = ComponentProps<typeof ShoppingCart> & {};
 
 export default function Header({ ...rest }: Props) {
-  const { cartList } = useCart();
-  const QuantityItemsInCart = cartList.length;
+  const { cartList, quantityItemsInCart } = useCart();
   return (
     <HeaderContainer>
       <Image alt="" src={logoImg} style={{ cursor: "pointer" }} />
@@ -26,7 +25,7 @@ export default function Header({ ...rest }: Props) {
           <p>Mauá,SP</p>
         </div>
 
-        {QuantityItemsInCart <= 0 ? (
+        {quantityItemsInCart <= 0 ? (
           <ShoppingCartButton disabled>
             <ShoppingCart aria-disabled weight="fill" size={22} {...rest} />
           </ShoppingCartButton>
@@ -34,7 +33,7 @@ export default function Header({ ...rest }: Props) {
           <Link href={"/ConfirmOrder"}>
             <ShoppingCartButton>
               <Counter>
-                <p>{QuantityItemsInCart}</p>
+                <p>{quantityItemsInCart}</p>
               </Counter>
               <ShoppingCart aria-disabled weight="fill" size={22} {...rest} />
             </ShoppingCartButton>

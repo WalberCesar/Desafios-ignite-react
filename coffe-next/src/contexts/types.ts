@@ -4,6 +4,7 @@ export type CartContentProps = {
   addCoffeInCart(coffe: ProductProps, quantity: number): void;
   cartList: ProductProps[];
   setCartList: Dispatch<SetStateAction<ProductProps[]>>;
+  quantityItemsInCart: number;
 };
 export type CartContextProviderProps = {
   children: ReactNode;

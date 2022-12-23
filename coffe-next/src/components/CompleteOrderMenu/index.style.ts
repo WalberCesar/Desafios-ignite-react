@@ -49,7 +49,7 @@ export const ContainerCompleteOrderMenu = styled("div", {
 
     "&:disabled": {
       cursor: "not-allowed",
-      opacity: 0.7,
+      opacity: 0.5,
     },
   },
 });
@@ -85,5 +85,22 @@ export const ContainerTotalPrice = styled("div", {
       lineHeight: "130%",
       color: "$base-text",
     },
+  },
+});
+
+export const ContainerNotExistsCoffeInCart = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+
+  width: "100%",
+
+  h1: {
+    fontSize: 20,
+  },
+  svg: {
+    color: "$base-title",
+    marginLeft: 16,
   },
 });

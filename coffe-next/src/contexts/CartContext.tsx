@@ -35,8 +35,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
   }
 
+  const quantityItemsInCart = cartList.length;
+
   return (
-    <CartContext.Provider value={{ addCoffeInCart, cartList, setCartList }}>
+    <CartContext.Provider
+      value={{ addCoffeInCart, cartList, setCartList, quantityItemsInCart }}
+    >
       {children}
     </CartContext.Provider>
   );
