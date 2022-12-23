@@ -1,0 +1,20 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
+export type CartContentProps = {
+  addCoffeInCart(coffe: ProductProps, quantity: number): void;
+  cartList: ProductProps[];
+  setCartList: Dispatch<SetStateAction<ProductProps[]>>;
+};
+export type CartContextProviderProps = {
+  children: ReactNode;
+};
+
+export interface ProductProps {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  type: string;
+  imageUrl: string;
+  quantity?: number;
+}
