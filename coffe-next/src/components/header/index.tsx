@@ -18,7 +18,9 @@ export default function Header({ ...rest }: Props) {
   const { cartList, quantityItemsInCart } = useCart();
   return (
     <HeaderContainer>
-      <Image alt="" src={logoImg} style={{ cursor: "pointer" }} />
+      <Link href={"/"} prefetch={false}>
+        <Image alt="" src={logoImg} style={{ cursor: "pointer" }} />
+      </Link>
       <RightHeaderMenu>
         <div>
           <MapPin weight="fill" size={22} />
@@ -30,7 +32,7 @@ export default function Header({ ...rest }: Props) {
             <ShoppingCart aria-disabled weight="fill" size={22} {...rest} />
           </ShoppingCartButton>
         ) : (
-          <Link href={"/ConfirmOrder"}>
+          <Link href={"/ConfirmOrder"} prefetch={false}>
             <ShoppingCartButton>
               <Counter>
                 <p>{quantityItemsInCart}</p>

@@ -1,5 +1,6 @@
 import { ShoppingCartSimple } from "phosphor-react";
-import { ProductProps } from "../../contexts/types";
+import { UseFormHandleSubmit } from "react-hook-form";
+import { FormProps, ProductProps } from "../../contexts/types";
 import { useCart } from "../../contexts/useCartContext";
 import CardCoffeSelected from "../CardCoffeSelected";
 import {
@@ -8,8 +9,17 @@ import {
   ContainerTotalPrice,
 } from "./index.style";
 
-export default function CompleteOrderMenu() {
+type CompleteOrderMenuProps = {
+  handleBuyCoffesInCart(): Promise<void>;
+  handleSubmit: UseFormHandleSubmit<FormProps>;
+};
+
+export default function CompleteOrderMenu({
+  handleBuyCoffesInCart,
+  handleSubmit,
+}: CompleteOrderMenuProps) {
   const { cartList, quantityItemsInCart } = useCart();
+
   const priceFrete = cartList.length > 0 ? 3.5 : 0;
   const FormatedPriceFrete = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -63,7 +73,12 @@ export default function CompleteOrderMenu() {
             <p>{totalPrice}</p>
           </div>
         </ContainerTotalPrice>
-        <button disabled={quantityItemsInCart <= 0}>Confirmar Pedido</button>
+        <button
+          onClick={handleBuyCoffesInCart}
+          // disabled={quantityItemsInCart <= 0}
+        >
+          Confirmar Pedido
+        </button>
       </footer>
     </ContainerCompleteOrderMenu>
   );

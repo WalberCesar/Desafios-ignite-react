@@ -1,6 +1,11 @@
+import axios from "axios";
+import Head from "next/head";
 import { CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import CompleteOrderMenu from "../components/CompleteOrderMenu";
 import FormAdrees from "../components/FormAdrees";
+import { FormProps, ProductProps } from "../contexts/types";
 import { useCart } from "../contexts/useCartContext";
 import {
   Button,
@@ -14,13 +19,46 @@ import {
 } from "../styles/Pages/ConfirmOrder";
 export default function ConfirmOrder() {
   const { cartList } = useCart();
+  const { register, handleSubmit } = useForm<FormProps>();
+  const [dataAdrees, setDataAdrees] = useState<FormProps>({} as FormProps);
+
+  async function handleBuyCoffesInCart() {
+    //
+    //   bairro: bairro,
+    //   cep: cep,
+    //   cidade: cidade,
+    //   complemento: complemento,
+    //   numero: numero,
+    //   rua: rua,
+    //   uf: uf,
+    //   pagamento: pagamento,
+    // };
+
+    // console.log(data);
+    // setDataAdrees(data);
+
+    try {
+      const response = await axios.post("/api/checkout", {
+        cartList,
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      alert("falha ao direcionar para o pagamento");
+    }
+  }
 
   return (
     <>
+      <Head>
+        <title>Coffe Delivey | Confirm Order</title>
+      </Head>
       <ConfirmOrderConatiner>
         <ContainerAdreesAndPayament>
           <TitleText>Complete seu pedido</TitleText>
-          <FormAdrees />
+          <FormAdrees register={register} />
           <PayamentContainer>
             <HeaderPayamentContainer>
               <CurrencyDollar weight="regular" />
@@ -52,7 +90,10 @@ export default function ConfirmOrder() {
 
         <ContainerCompleteOrderMenu>
           <TitleText>Cafés selecionados</TitleText>
-          <CompleteOrderMenu />
+          <CompleteOrderMenu
+            handleSubmit={handleSubmit}
+            handleBuyCoffesInCart={handleBuyCoffesInCart}
+          />
         </ContainerCompleteOrderMenu>
       </ConfirmOrderConatiner>
     </>

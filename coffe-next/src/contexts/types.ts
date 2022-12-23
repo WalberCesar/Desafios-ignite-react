@@ -1,5 +1,16 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
+export type FormProps = {
+  cep: string;
+  rua: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+  pagamento?: "Cartão de Crédito" | "Cartão de Débito" | "Dinheiro" | "";
+};
+
 export type CartContentProps = {
   addCoffeInCart(coffe: ProductProps, quantity: number): void;
   cartList: ProductProps[];
@@ -18,4 +29,5 @@ export interface ProductProps {
   type: string;
   imageUrl: string;
   quantity?: number;
+  defaultPriceId?: string;
 }

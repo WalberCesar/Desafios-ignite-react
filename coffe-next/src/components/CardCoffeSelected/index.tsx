@@ -42,7 +42,6 @@ export default function CardCoffeSelected({ coffe }: Props) {
   }
 
   function handleDecrease() {
-    console.log("cartList =>", cartList);
     const decrementQuantity = cartList.map((item) => {
       if (item.id === coffe.id) {
         return {

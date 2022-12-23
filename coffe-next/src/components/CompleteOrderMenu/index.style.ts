@@ -100,7 +100,7 @@ export const ContainerNotExistsCoffeInCart = styled("div", {
     fontSize: 20,
   },
   svg: {
-    color: "$base-title",
+    color: "$base-subtitle",
     marginLeft: 16,
   },
 });

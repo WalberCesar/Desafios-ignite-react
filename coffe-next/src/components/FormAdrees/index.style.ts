@@ -1,6 +1,6 @@
 import { styled } from "../../styles";
 
-export const FormAdreesContainer = styled("div", {
+export const FormAdreesContainer = styled("form", {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
