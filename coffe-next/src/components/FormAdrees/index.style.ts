@@ -6,7 +6,6 @@ export const FormAdreesContainer = styled("form", {
   alignItems: "flex-start",
   padding: 40,
   gap: 32,
-
   width: "100%",
   minHeight: 372,
 
@@ -25,7 +24,7 @@ export const FormAdreesContainer = styled("form", {
       color: "$yellow-dark",
     },
 
-    div: {
+    ">div": {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
@@ -53,46 +52,7 @@ export const FormAdreesContainer = styled("form", {
   },
 });
 
-export const Input = styled("input", {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "center",
-  padding: 12,
-  gap: 4,
-
-  height: 42,
-  width: 200,
-
-  backgroundColor: "$base-input",
-  border: "1px solid $base-button",
-  borderRadius: 4,
-
-  "&::placeholder": {
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontSize: 14,
-    fontWeight: 400,
-    lineHeight: "130%",
-
-    color: "$base-text",
-  },
-
-  variants: {
-    size: {
-      Large: {
-        width: "100%",
-      },
-      medium: {
-        width: 276,
-      },
-      small: {
-        width: 60,
-      },
-    },
-  },
-});
-
-export const ContainerInput = styled("div", {
+export const Container = styled("div", {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -101,12 +61,12 @@ export const ContainerInput = styled("div", {
 
   height: 216,
   width: "100%",
+});
 
-  div: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    width: "100%",
-  },
+export const InputWrapper = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+  width: "100%",
 });

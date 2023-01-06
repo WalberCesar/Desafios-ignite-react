@@ -10,7 +10,16 @@ import {
 } from "./index.style";
 
 type CompleteOrderMenuProps = {
-  handleBuyCoffesInCart(): Promise<void>;
+  handleBuyCoffesInCart({
+    bairro,
+    cep,
+    cidade,
+    complemento,
+    numero,
+    rua,
+    uf,
+    pagamento,
+  }: FormProps): Promise<void>;
   handleSubmit: UseFormHandleSubmit<FormProps>;
 };
 
@@ -74,8 +83,8 @@ export default function CompleteOrderMenu({
           </div>
         </ContainerTotalPrice>
         <button
-          onClick={handleBuyCoffesInCart}
-          // disabled={quantityItemsInCart <= 0}
+          onClick={handleSubmit(handleBuyCoffesInCart)}
+          disabled={quantityItemsInCart <= 0}
         >
           Confirmar Pedido
         </button>

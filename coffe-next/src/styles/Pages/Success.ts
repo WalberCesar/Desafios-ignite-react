@@ -45,7 +45,7 @@ export const BuyInformations = styled("div", {
   padding: 40,
   gap: 32,
   width: 526,
-  height: 270,
+  minHeight: 270,
   border: "1px solid black",
   borderRadius: "6px 36px",
 });
@@ -85,6 +85,9 @@ export const ContainerIcon = styled("div", {
       orange: {
         backgroundColor: "$yellow-dark",
       },
+      black: {
+        backgroundColor: "$base-text",
+      },
     },
   },
 });
@@ -94,4 +97,30 @@ export const ContainerText = styled("div", {
   flexDirection: "column",
   padding: 0,
   gap: 4,
+});
+
+export const Details = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: 0,
+  gap: 12,
+  width: "100%",
+
+  strong: {
+    fontSize: 20,
+    lineHeight: "130%",
+    color: "$base-subtitle",
+    fontStretch: 100,
+    fontWeight: 400,
+  },
+});
+
+export const ContainerImages = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  padding: 0,
+  width: "100%",
+  // gap: 12,
 });

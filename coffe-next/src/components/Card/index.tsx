@@ -46,7 +46,7 @@ export default function Card({ coffe }: CardProps) {
         <strong>{formatedPrice}</strong>
         <div>
           <div>
-            {quantity >= 2 ? (
+            {quantity >= 2 && coffeAlreadyExistsInCart < 0 ? (
               <Minus cursor="pointer" onClick={handleDecrease} />
             ) : (
               <Minus cursor="not-allowed" />

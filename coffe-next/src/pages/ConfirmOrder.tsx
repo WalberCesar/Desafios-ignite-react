@@ -1,7 +1,7 @@
 import axios from "axios";
 import Head from "next/head";
 import { CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CompleteOrderMenu from "../components/CompleteOrderMenu";
 import FormAdrees from "../components/FormAdrees";
@@ -17,36 +17,97 @@ import {
   TitleText,
   ContainerCompleteOrderMenu,
 } from "../styles/Pages/ConfirmOrder";
+
+type ErrorsType = {
+  errors: {
+    [key: string]: {
+      message: string;
+    };
+  };
+};
+
 export default function ConfirmOrder() {
-  const { cartList } = useCart();
-  const { register, handleSubmit } = useForm<FormProps>();
-  const [dataAdrees, setDataAdrees] = useState<FormProps>({} as FormProps);
+  const { cartList, setCartList, quantityItemsInCart } = useCart();
+  const { register, handleSubmit, formState } = useForm<FormProps>();
+  const { errors } = formState as unknown as ErrorsType;
+  const [methodPayament, setMethodPayament] = useState<string>("");
+  useEffect(() => {
+    if (quantityItemsInCart <= 0) {
+      setMethodPayament("");
+    }
+  }, [quantityItemsInCart]);
 
-  async function handleBuyCoffesInCart() {
-    //
-    //   bairro: bairro,
-    //   cep: cep,
-    //   cidade: cidade,
-    //   complemento: complemento,
-    //   numero: numero,
-    //   rua: rua,
-    //   uf: uf,
-    //   pagamento: pagamento,
-    // };
-
-    // console.log(data);
-    // setDataAdrees(data);
-
+  async function handleBuyCoffesInCart({
+    bairro,
+    cep,
+    cidade,
+    complemento,
+    numero,
+    rua,
+    uf,
+    pagamento,
+  }: FormProps) {
     try {
-      const response = await axios.post("/api/checkout", {
-        cartList,
-      });
+      if (methodPayament === "") {
+        alert("Adicione uma forma de pagamento");
+      } else {
+        const dataForm = {
+          bairro: bairro,
+          cep: cep,
+          cidade: cidade,
+          complemento: complemento,
+          numero: numero,
+          rua: rua,
+          uf: uf,
+          pagamento: methodPayament,
+        };
 
-      const { checkoutUrl } = response.data;
+        const dataFormString = await JSON.stringify(dataForm);
+        await localStorage.setItem("coffe_next_addres", dataFormString);
 
-      window.location.href = checkoutUrl;
+        const dataAdreesAndCartList = cartList.map((item) => {
+          return {
+            name: item.name,
+            id: item.id,
+            description: item.description,
+            price: item.price * item.quantity,
+            imageUrl: item.imageUrl,
+            quantity: item.quantity,
+            formatedPrice: new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(item.price * item.quantity),
+            type: item.type,
+            defaultPriceId: item.defaultPriceId,
+            addres: dataForm,
+          };
+        });
+
+        setCartList(dataAdreesAndCartList);
+
+        const response = await axios.post("/api/checkout", {
+          cartList,
+        });
+
+        const { checkoutUrl } = response.data;
+
+        window.location.href = checkoutUrl;
+
+        const data = {
+          bairro: bairro,
+          cep: cep,
+          cidade: cidade,
+          complemento: complemento,
+          numero: numero,
+          rua: rua,
+          uf: uf,
+          pagamento: pagamento,
+        };
+      }
     } catch (err) {
-      alert("falha ao direcionar para o pagamento");
+      if (methodPayament !== "") {
+        alert("falha ao direcionar para o pagamento");
+      }
     }
   }
 
@@ -58,7 +119,7 @@ export default function ConfirmOrder() {
       <ConfirmOrderConatiner>
         <ContainerAdreesAndPayament>
           <TitleText>Complete seu pedido</TitleText>
-          <FormAdrees register={register} />
+          <FormAdrees error={errors} register={register} />
           <PayamentContainer>
             <HeaderPayamentContainer>
               <CurrencyDollar weight="regular" />
@@ -72,18 +133,62 @@ export default function ConfirmOrder() {
             </HeaderPayamentContainer>
 
             <MethodPayamentContainer>
-              <Button border={"select"}>
-                <CreditCard weight="regular" />
-                <p>CARTÃO DE CRÉDITO</p>
-              </Button>
-              <Button>
-                <Bank weight="regular" />
-                <p>CARTÃO DE DÉBITO</p>
-              </Button>
-              <Button>
-                <Money weight="regular" />
-                <p>DINHEIRO</p>
-              </Button>
+              {methodPayament === "Cartão de crédito" ? (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("")}
+                  border={"select"}
+                >
+                  <CreditCard weight="regular" />
+                  <p>CARTÃO DE CRÉDITO</p>
+                </Button>
+              ) : (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("Cartão de crédito")}
+                >
+                  <CreditCard weight="regular" />
+                  <p>CARTÃO DE CRÉDITO</p>
+                </Button>
+              )}
+
+              {methodPayament === "Cartão de débito" ? (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("")}
+                  border={"select"}
+                >
+                  <Bank weight="regular" />
+                  <p>CARTÃO DE DÉBITO</p>
+                </Button>
+              ) : (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("Cartão de débito")}
+                >
+                  <Bank weight="regular" />
+                  <p>CARTÃO DE DÉBITO</p>
+                </Button>
+              )}
+
+              {methodPayament === "Dinheiro" ? (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("")}
+                  border={"select"}
+                >
+                  <Money weight="regular" />
+                  <p>DINHEIRO</p>
+                </Button>
+              ) : (
+                <Button
+                  disabled={quantityItemsInCart <= 0}
+                  onClick={() => setMethodPayament("Dinheiro")}
+                >
+                  <Money weight="regular" />
+                  <p>DINHEIRO</p>
+                </Button>
+              )}
             </MethodPayamentContainer>
           </PayamentContainer>
         </ContainerAdreesAndPayament>

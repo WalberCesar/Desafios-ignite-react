@@ -25,9 +25,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
           id: coffe.id,
           imageUrl: coffe.imageUrl,
           name: coffe.name,
-          price: coffe.price,
+          price: coffe.price * coffe.quantity,
           type: coffe.type,
           quantity: quantity,
+          defaultPriceId: coffe.defaultPriceId,
+          formatedPrice: new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(coffe.price * coffe.quantity),
         },
       ]);
     } else {

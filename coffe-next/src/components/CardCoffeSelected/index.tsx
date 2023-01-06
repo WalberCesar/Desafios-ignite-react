@@ -32,6 +32,8 @@ export default function CardCoffeSelected({ coffe }: Props) {
           quantity: coffe.quantity! + 1,
           description: item.description,
           type: item.type,
+          defaultPriceId: item.defaultPriceId,
+          formatedPrice: item.formatedPrice,
         };
       } else {
         return item;
@@ -52,6 +54,8 @@ export default function CardCoffeSelected({ coffe }: Props) {
           quantity: item.quantity! - 1,
           description: item.description,
           type: item.type,
+          defaultPriceId: item.defaultPriceId,
+          formatedPrice: item.formatedPrice,
         };
       } else {
         return item;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { CurrencyDollar, MapPin, Timer, User } from "phosphor-react";
 import {
   BuyInformations,
   ContainerIcon,
@@ -10,8 +10,30 @@ import {
 
 import imgSuccess from "../assets/Illustration.png";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import { stripe } from "../lib/stripe";
+import Stripe from "stripe";
+import { useEffect, useState } from "react";
+import { FormProps } from "../contexts/types";
 
-export default function Success() {
+interface SuccesProps {
+  costumerName: string;
+  productImages: string[];
+  totalPrice: string;
+}
+
+export default function Success({ costumerName, totalPrice }: SuccesProps) {
+  const [addres, setAddres] = useState<FormProps>({} as FormProps);
+
+  useEffect(() => {
+    async function getAddres() {
+      const response = await localStorage.getItem("coffe_next_addres");
+      const responseJSON = await JSON.parse(response!);
+      setAddres(responseJSON);
+    }
+    getAddres();
+  }, []);
+
   return (
     <>
       {" "}
@@ -24,12 +46,21 @@ export default function Success() {
           <strong>Agora é só aguardar que logo o café chegará até você</strong>
           <BuyInformations>
             <Itens>
+              <ContainerIcon color={"black"}>
+                <User weight="fill" />
+              </ContainerIcon>
+              <p>{costumerName}</p>
+            </Itens>
+            <Itens>
               <ContainerIcon color={"purple"}>
                 <MapPin weight="fill" />
               </ContainerIcon>
               <p>
-                Entrega em <b>Rua João Daniel Martinelli, 102 </b>
-                <br /> Farrapos- Porto Alegre, RS
+                Entrega em{" "}
+                <b>
+                  Rua {addres.rua}, {addres.numero}{" "}
+                </b>
+                <br /> {addres.bairro}- {addres.cidade}, {addres.uf}
               </p>
             </Itens>
             <Itens>
@@ -46,8 +77,8 @@ export default function Success() {
                 <CurrencyDollar weight="fill" />
               </ContainerIcon>
               <p>
-                Pagamento na entrega
-                <br /> <b>Cartão de crédito</b>
+                <b>Total:</b> {totalPrice}
+                <br /> <b>Forma de pagamento:</b> {addres.pagamento}
               </p>
             </Itens>
           </BuyInformations>
@@ -58,3 +89,28 @@ export default function Success() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const sessionId = String(query.session_id);
+
+  const response = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["line_items", "line_items.data.price.product"],
+  });
+  console.log("response => ", response);
+  const costumerName = response.customer_details?.name as string;
+  const productImages = response.line_items?.data.map((item) => {
+    const product = item.price?.product as Stripe.Product;
+    return product.images;
+  });
+  const totalPrice = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(Number(response.amount_total) / 100);
+  return {
+    props: {
+      costumerName,
+      productImages,
+      totalPrice,
+    },
+  };
+};

@@ -118,6 +118,9 @@ export const Button = styled("button", {
   borderRadius: 6,
 
   cursor: "pointer",
+  "&:disabled": {
+    cursor: "not-allowed",
+  },
 
   p: {
     fontSize: 12,

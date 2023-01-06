@@ -1,12 +1,19 @@
 import { MapPin } from "phosphor-react";
 import { UseFormRegister } from "react-hook-form";
 import { FormProps } from "../../contexts/types";
-import { FormAdreesContainer, Input, ContainerInput } from "./index.style";
+import Input from "../Input";
+
+import { FormAdreesContainer, Container, InputWrapper } from "./index.style";
 
 type FormAdreesProps = {
   register: UseFormRegister<FormProps>;
+  error: {
+    [key: string]: {
+      message: string;
+    };
+  };
 };
-export default function FormAdrees({ register }: FormAdreesProps) {
+export default function FormAdrees({ register, error }: FormAdreesProps) {
   return (
     <FormAdreesContainer>
       <header>
@@ -17,23 +24,65 @@ export default function FormAdrees({ register }: FormAdreesProps) {
         </div>
       </header>
 
-      <ContainerInput>
-        <Input placeholder="Telefone" {...register("cep")} />
-        <Input placeholder="Rua" size={"Large"} {...register("rua")} />
-        <div>
-          <Input placeholder="Número" {...register("numero")} />
+      <Container>
+        <Input
+          error={error.cep?.message}
+          register={register}
+          nameInput="cep"
+          placeholder="Cep"
+          sizeInput={"default"}
+        />
+
+        <Input
+          error={error.rua?.message}
+          register={register}
+          nameInput="rua"
+          placeholder="Rua"
+          sizeInput={"Large"}
+        />
+
+        <InputWrapper>
           <Input
-            placeholder="Complemento"
-            size={"Large"}
-            {...register("complemento")}
+            error={error.numero?.message}
+            placeholder="Número"
+            register={register}
+            nameInput="numero"
+            sizeInput={"default"}
           />
-        </div>
-        <div>
-          <Input placeholder="Bairro" {...register("bairro")} />
-          <Input placeholder="Cidade" size={"medium"} {...register("cidade")} />
-          <Input placeholder="UF" size={"small"} {...register("uf")} />
-        </div>
-      </ContainerInput>
+
+          <Input
+            error={error.complemento?.message}
+            placeholder="Complemento"
+            register={register}
+            nameInput="complemento"
+            sizeInput={"Large"}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Input
+            error={error.bairro?.message}
+            placeholder="Bairro"
+            register={register}
+            nameInput="bairro"
+          />
+
+          <Input
+            error={error.cidade?.message}
+            placeholder="Cidade"
+            sizeInput={"medium"}
+            register={register}
+            nameInput="cidade"
+          />
+
+          <Input
+            error={error.uf?.message}
+            placeholder="UF"
+            sizeInput={"small"}
+            register={register}
+            nameInput="uf"
+          />
+        </InputWrapper>
+      </Container>
     </FormAdreesContainer>
   );
 }

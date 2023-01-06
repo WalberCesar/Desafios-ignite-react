@@ -8,7 +8,7 @@ export type FormProps = {
   bairro: string;
   cidade: string;
   uf: string;
-  pagamento?: "Cartão de Crédito" | "Cartão de Débito" | "Dinheiro" | "";
+  pagamento?: string;
 };
 
 export type CartContentProps = {
@@ -28,6 +28,8 @@ export interface ProductProps {
   price: number;
   type: string;
   imageUrl: string;
-  quantity?: number;
+  quantity: number;
   defaultPriceId?: string;
+  formatedPrice?: string;
+  addres?: FormProps;
 }
