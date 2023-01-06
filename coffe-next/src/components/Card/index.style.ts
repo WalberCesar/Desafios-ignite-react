@@ -72,7 +72,10 @@ export const CardContainer = styled("div", {
         borderRadius: 6,
 
         svg: {
-          color: "$purple-dark",
+          color: "$purple",
+          "&:hover": {
+            color: "$purple-dark",
+          },
         },
 
         p: {
