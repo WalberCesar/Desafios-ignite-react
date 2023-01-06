@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const totalPrice = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
-  }).format(Number(response.amount_total) / 100);
+  }).format(Number(response.amount_total! / 100) + 3.5);
   return {
     props: {
       costumerName,
