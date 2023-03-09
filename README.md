@@ -37,17 +37,16 @@ Durante este desafio, utilizamos conceitos um pouco mais avançados desenvolvend
 ### 🛠️ Nesse projeto foi utilizado
 
 * Vite
-* Styled Components
+* Stitches
 * Local Storage
 * Typescript
 * Context API
-* React Router Dom
-* React Hook Form
+* Stripe
 * Validações de formulário com Zod
 
 <br />
 
-<a href="">
+<a href="https://github.com/WalberCesar/Desafios-ignite-react/tree/main/coffe-next">
 <img src="https://user-images.githubusercontent.com/71772559/178192378-234b9c46-7e31-47fb-8ddf-245617d8b198.png" />
 </a>
 
@@ -74,7 +73,7 @@ Durante este desafio, desenvolvemos uma aplicação que utiliza a API do GitHub 
 
 <br />
 
-<a href="">
+<a href="https://github.com/WalberCesar/Desafios-ignite-react/tree/main/blog-git_hub">
 <img src="https://user-images.githubusercontent.com/71772559/178192378-234b9c46-7e31-47fb-8ddf-245617d8b198.png" />
 </a>
 
@@ -98,7 +97,7 @@ Durante este desafio foram desenvolvidas algumas funcionalidades extras no proje
 
 <br />
 
-<a href="">
+<a href="https://github.com/WalberCesar/Desafios-ignite-react/tree/main/ignite-shop">
 <img src="https://user-images.githubusercontent.com/71772559/178192378-234b9c46-7e31-47fb-8ddf-245617d8b198.png" />
 </a>
 
