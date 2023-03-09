@@ -8,9 +8,18 @@ export const Container = styled("div", {
   minHeight: "100vh",
 });
 
-export const Header = styled("header", {
-  padding: "2rem 0",
-  width: "100%",
-  maxWidth: 1180,
-  margin: "0 auto",
+export const IconContainer = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  padding: "0.75rem",
+  alignItems: "center",
+  justifyContent: "center",
+
+  width: "3rem",
+  height: "3rem",
+
+  borderRadius: "6px",
+  backgroundColor: "$gray800",
+
+  cursor: "pointer",
 });
