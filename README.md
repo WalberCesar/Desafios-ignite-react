@@ -36,7 +36,7 @@ Durante este desafio, utilizamos conceitos um pouco mais avançados desenvolvend
 
 ### 🛠️ Nesse projeto foi utilizado
 
-* Vite
+* Next
 * Stitches
 * Local Storage
 * Typescript
