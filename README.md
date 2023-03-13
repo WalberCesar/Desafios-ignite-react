@@ -57,8 +57,7 @@ Durante este desafio, utilizamos conceitos um pouco mais avançados desenvolvend
 &nbsp;
 
 ## Desafio 03 - Github Blog
-<img src="https://user-images.githubusercontent.com/71772559/184001699-6ccc6082-3a1e-46ef-b7cc-908667f0d90d.png" align="center" />
-
+<img src="https://camo.githubusercontent.com/0ec73fcdf2f9887f77decf47210ddda1a1ebd7c1b6e4f6b8f80a348bcb5b48d3/68747470733a2f2f7265732e636c6f7564696e6172792e636f6d2f76696c6d6172626174697374612f696d6167652f75706c6f61642f76313637313733303233302f446576656c6f706d656e742f49676e6974652f6769746875625f626c6f675f77396b39367a2e706e67
 Durante este desafio, desenvolvemos uma aplicação que utiliza a API do GitHub para buscar issues de um repositório, dados do perfil e exibir elas como um blog.
 
 ### 🛠️ Nesse projeto foi utilizado
