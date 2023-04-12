@@ -23,9 +23,24 @@ export default function CartProductContextProvider({
 
     setCartProducts(filterCartProducts)
   }
+
+  function checkAlreadyProductExistsInCart(productId: string) {
+    const verify = cartProducts.findIndex((Product) => Product.id === productId)
+
+    if (verify === -1) {
+      return false
+    } else {
+      return true
+    }
+  }
   return (
     <cartProductContext.Provider
-      value={{ cartProducts, addProductInCart, removeProductInCart }}
+      value={{
+        cartProducts,
+        addProductInCart,
+        removeProductInCart,
+        checkAlreadyProductExistsInCart,
+      }}
     >
       {children}
     </cartProductContext.Provider>

@@ -12,16 +12,20 @@ import Stripe from 'stripe'
 import Button from '../components/Button'
 import { useCart } from '../contexts/useCart'
 import { ProductsProps } from '../contexts/types'
+import { MouseEvent } from 'react'
 
 interface HomeProps {
   products: ProductsProps[]
 }
 
 export default function Home({ products }: HomeProps) {
-  const { addProductInCart, cartProducts } = useCart()
-  console.log(cartProducts)
+  const { addProductInCart, checkAlreadyProductExistsInCart } = useCart()
 
-  function handleAddProductInCart(product: ProductsProps) {
+  function handleAddProductInCart(
+    product: ProductsProps,
+    e: MouseEvent<HTMLButtonElement>,
+  ) {
+    e.preventDefault()
     addProductInCart(product)
   }
 
@@ -41,7 +45,7 @@ export default function Home({ products }: HomeProps) {
         {products.map((product) => {
           return (
             <Product
-              // href={`/product/${product.id}`}
+              href={`/product/${product.id}`}
               key={product.id}
               className="keen-slider__slide"
             >
@@ -54,8 +58,9 @@ export default function Home({ products }: HomeProps) {
                 </div>
 
                 <Button
-                  onClick={() => handleAddProductInCart(product)}
+                  onClick={(e) => handleAddProductInCart(product, e)}
                   colors="greenButton"
+                  disabled={checkAlreadyProductExistsInCart(product.id)}
                 />
               </footer>
             </Product>
@@ -80,6 +85,8 @@ export const getStaticProps: GetStaticProps = async () => {
         style: 'currency',
         currency: 'BRL',
       }).format(price.unit_amount! / 100),
+      description: product.description,
+      defaultPriceId: price.id,
     }
   })
 

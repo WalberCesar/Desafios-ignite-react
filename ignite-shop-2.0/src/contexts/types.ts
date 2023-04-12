@@ -4,6 +4,8 @@ export interface ProductsProps {
   name: string
   imageUrl: string
   price: string
+  description: string
+  defaultPriceId: string
 }
 
 export interface CartProductsContextProviderProps {
@@ -14,4 +16,5 @@ export interface CartProductsContent {
   cartProducts: ProductsProps[]
   addProductInCart(product: ProductsProps): void
   removeProductInCart(productId: string): void
+  checkAlreadyProductExistsInCart(productId: string): boolean
 }

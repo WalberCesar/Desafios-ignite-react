@@ -8,37 +8,21 @@ import {
 import { stripe } from '../../lib/stripe'
 import Stripe from 'stripe'
 import Image from 'next/image'
-import axios from 'axios'
-import { useState } from 'react'
+
 import Head from 'next/head'
 import CartButton from '@/src/components/CartButton'
+import { useCart } from '@/src/contexts/useCart'
+import { ProductsProps } from '@/src/contexts/types'
 
-interface ProductProps {
-  product: {
-    id?: string
-    name: string
-    imageUrl: string
-    price: string
-    description: string
-    defaultPriceId: string
-  }
+interface Props {
+  product: ProductsProps
 }
 
-export default function Product({ product }: ProductProps) {
-  const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
-  async function handleBuyProduct() {
-    try {
-      setIsCreateCheckoutSession(true)
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
-      const { checkoutUrl } = response.data
+export default function Product({ product }: Props) {
+  const { addProductInCart, checkAlreadyProductExistsInCart } = useCart()
 
-      window.location.href = checkoutUrl
-    } catch (err) {
-      setIsCreateCheckoutSession(false)
-      alert('Falha ao direcionar ao checkout')
-    }
+  function handleAddProductInCart(product: ProductsProps) {
+    addProductInCart(product)
   }
 
   return (
@@ -59,9 +43,13 @@ export default function Product({ product }: ProductProps) {
           <p>{product.description}</p>
 
           <CartButton
-            disabled={isCreateCheckoutSession}
-            onClick={handleBuyProduct}
-            text="Comprar agora"
+            disabled={checkAlreadyProductExistsInCart(product.id)}
+            onClick={() => handleAddProductInCart(product)}
+            text={
+              checkAlreadyProductExistsInCart(product.id) === false
+                ? 'Colocar na sacola'
+                : 'Produto ja adicionado na sacola'
+            }
           />
         </ProductDetails>
       </ProductContainer>
