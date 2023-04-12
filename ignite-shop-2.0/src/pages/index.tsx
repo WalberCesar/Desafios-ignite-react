@@ -9,7 +9,7 @@ import 'keen-slider/keen-slider.min.css'
 import { GetStaticProps } from 'next'
 import { stripe } from '../lib/stripe'
 import Stripe from 'stripe'
-import BuyButton from '../components/Button'
+import Button from '../components/Button'
 
 interface HomeProps {
   products: {
@@ -52,7 +52,7 @@ export default function Home({ products }: HomeProps) {
                   <span>{product.price}</span>
                 </div>
 
-                <BuyButton colors={'greenButton'} />
+                <Button colors={'greenButton'} />
               </footer>
             </Product>
           )

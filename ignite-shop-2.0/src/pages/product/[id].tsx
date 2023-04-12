@@ -11,6 +11,7 @@ import Image from 'next/image'
 import axios from 'axios'
 import { useState } from 'react'
 import Head from 'next/head'
+import CartButton from '@/src/components/CartButton'
 
 interface ProductProps {
   product: {
@@ -57,9 +58,11 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreateCheckoutSession} onClick={handleBuyProduct}>
-            Comprar agora
-          </button>
+          <CartButton
+            disabled={isCreateCheckoutSession}
+            onClick={handleBuyProduct}
+            text="Comprar agora"
+          />
         </ProductDetails>
       </ProductContainer>
     </>
