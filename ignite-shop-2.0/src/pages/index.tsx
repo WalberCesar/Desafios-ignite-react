@@ -9,6 +9,7 @@ import 'keen-slider/keen-slider.min.css'
 import { GetStaticProps } from 'next'
 import { stripe } from '../lib/stripe'
 import Stripe from 'stripe'
+import BuyButton from '../components/Button'
 
 interface HomeProps {
   products: {
@@ -20,6 +21,7 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
+  // const {} = useCart()
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -45,8 +47,12 @@ export default function Home({ products }: HomeProps) {
               <Image src={product.imageUrl} width={520} height={480} alt="" />
 
               <footer>
-                <strong>{product.name}</strong>
-                <span>{product.price}</span>
+                <div>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </div>
+
+                <BuyButton colors={'greenButton'} />
               </footer>
             </Product>
           )
