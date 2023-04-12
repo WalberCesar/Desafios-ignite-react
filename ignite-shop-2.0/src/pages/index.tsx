@@ -10,26 +10,27 @@ import { GetStaticProps } from 'next'
 import { stripe } from '../lib/stripe'
 import Stripe from 'stripe'
 import Button from '../components/Button'
+import { useCart } from '../contexts/useCart'
+import { ProductsProps } from '../contexts/types'
 
 interface HomeProps {
-  products: {
-    id?: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
+  products: ProductsProps[]
 }
 
 export default function Home({ products }: HomeProps) {
-  // const {} = useCart()
+  const { addProductInCart, cartProducts } = useCart()
+  console.log(cartProducts)
+
+  function handleAddProductInCart(product: ProductsProps) {
+    addProductInCart(product)
+  }
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
   })
-
-  console.log(products)
 
   return (
     <>
@@ -40,7 +41,7 @@ export default function Home({ products }: HomeProps) {
         {products.map((product) => {
           return (
             <Product
-              href={`/product/${product.id}`}
+              // href={`/product/${product.id}`}
               key={product.id}
               className="keen-slider__slide"
             >
@@ -52,7 +53,10 @@ export default function Home({ products }: HomeProps) {
                   <span>{product.price}</span>
                 </div>
 
-                <Button colors={'greenButton'} />
+                <Button
+                  onClick={() => handleAddProductInCart(product)}
+                  colors="greenButton"
+                />
               </footer>
             </Product>
           )
