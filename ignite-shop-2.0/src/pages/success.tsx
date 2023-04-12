@@ -12,8 +12,7 @@ interface SuccessProps {
 }
 
 export default function Success({ customerName, images }: SuccessProps) {
-  // console.log('images =>', images)
-  const quantityItemsInCart = images[0].length
+  const quantityItemsInCart = images.length
   return (
     <>
       <Head>
@@ -23,12 +22,14 @@ export default function Success({ customerName, images }: SuccessProps) {
       </Head>
       <SuccessContainer>
         <h1>Compra efetuada</h1>
-        {images[0].map((imageUrl) => {
-          return (
-            <ImageContainer key={imageUrl}>
-              <Image src={imageUrl} width={120} height={110} alt="" />
-            </ImageContainer>
-          )
+        {images.map((images) => {
+          return images.map((imageUrl) => {
+            return (
+              <ImageContainer key={imageUrl}>
+                <Image src={imageUrl} width={120} height={110} alt="" />
+              </ImageContainer>
+            )
+          })
         })}
 
         <p>

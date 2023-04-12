@@ -12,7 +12,6 @@ import { useCart } from '@/src/contexts/useCart'
 
 export default function CartMenu() {
   const { cartProducts } = useCart()
-  console.log('cartProducts =>', cartProducts)
   const [isCreateCheckoutSession, setIsCreateCheckoutSession] = useState(false)
   async function handleBuyProduct() {
     try {
