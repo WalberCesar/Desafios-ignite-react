@@ -5,13 +5,16 @@ import logoImg from '../../assets/logo.svg'
 import CartMenu from '../CartMenu'
 
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Header() {
   const { pathname } = useRouter()
   const showbuttonCartMenu = pathname !== '/success'
   return (
     <HeaderContainer>
-      <Image src={logoImg} alt="" />
+      <Link href={'/'}>
+        <Image src={logoImg} alt="" />
+      </Link>
       {showbuttonCartMenu && <CartMenu />}
     </HeaderContainer>
   )
