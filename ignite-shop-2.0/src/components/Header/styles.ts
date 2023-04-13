@@ -5,9 +5,11 @@ export const HeaderContainer = styled('header', {
   width: '100%',
   maxWidth: 1180,
   margin: '0 auto',
-
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
+  button: {
+    marginLeft: 'auto',
+  },
 })
