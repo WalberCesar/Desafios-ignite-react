@@ -96,7 +96,7 @@ Durante este desafio foram desenvolvidas algumas funcionalidades extras no proje
 
 <br />
 
-<a href="https://github.com/WalberCesar/Desafios-ignite-react/tree/main/ignite-shop">
+<a href="https://github.com/WalberCesar/Desafios-ignite-react/tree/main/ignite-shop-2.0">
 <img src="https://user-images.githubusercontent.com/71772559/178192378-234b9c46-7e31-47fb-8ddf-245617d8b198.png" />
 </a>
 
