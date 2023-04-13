@@ -31,7 +31,7 @@ export default function CartMenu() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button colors={'grayButton'} />
+        <Button showCounter colors={'grayButton'}></Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <CartMenuContainer>

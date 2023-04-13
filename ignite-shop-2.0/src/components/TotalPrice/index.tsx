@@ -17,7 +17,6 @@ export default function TotalPrice() {
     currency: 'BRL',
   }).format(totalPrice)
 
-  console.log('totalPrice => ', totalPrice)
   return (
     <TotalPriceContainer>
       <div>
