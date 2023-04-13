@@ -44,7 +44,9 @@ export default function CartMenu() {
             {cartProducts.map((product) => {
               return <CardProduct key={product.id} product={product} />
             })}
+          </div>
 
+          <div>
             <TotalPrice />
             <CartButton
               disabled={isCreateCheckoutSession || cartProducts.length === 0}

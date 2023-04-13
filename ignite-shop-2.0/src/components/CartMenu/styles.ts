@@ -16,11 +16,8 @@ export const CartMenuContainer = styled(Dialog.Content, {
   top: 0,
   boxShadow: '-4px 0px 30px rgba(0, 0, 0, 0.8);',
 
-  '> div': {
+  ' div': {
     width: '100%',
-    h3: {
-      color: '$gray400',
-    },
   },
 })
 
