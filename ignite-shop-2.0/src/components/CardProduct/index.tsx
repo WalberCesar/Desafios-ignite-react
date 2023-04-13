@@ -16,7 +16,7 @@ export function CardProduct({ product }: CardProductProps) {
   return (
     <CardProductContainer>
       <ImageContainer>
-        <Image src={product.imageUrl} width={94} height={94} alt="" />
+        <Image src={product.imageUrl} width={84} height={84} alt="" />
       </ImageContainer>
       <div>
         <strong>{product.name}</strong>

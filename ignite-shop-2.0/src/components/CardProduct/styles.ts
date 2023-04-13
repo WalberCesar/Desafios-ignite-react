@@ -9,7 +9,7 @@ export const CardProductContainer = styled('div', {
   marginBottom: '1.5rem',
 
   width: '100%',
-  height: '6rem',
+  height: '4rem',
 
   div: {
     flex: '1',
@@ -22,20 +22,19 @@ export const CardProductContainer = styled('div', {
       fontSize: '1.125rem',
       marginBottom: '0.125rem',
       color: '$gray300',
-      lineHeight: '160%',
     },
     span: {
       fontWeight: 700,
       fontSize: '1.125rem',
-      lineHeight: '160%',
+
       color: '$gray100',
     },
     p: {
       fontWeight: 700,
       fontSize: '1rem',
       lineHeight: '160%',
+      marginTop: 8,
 
-      marginTop: '0.5rem',
       color: '$green500',
       cursor: 'pointer',
 
@@ -50,8 +49,8 @@ export const CardProductContainer = styled('div', {
 
 export const ImageContainer = styled('div', {
   width: '100%',
-  maxWidth: 101.94,
-  height: 93,
+  maxWidth: 81.94,
+  height: 73,
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   borderRadius: 8,
   padding: '0.25rem',
@@ -62,5 +61,6 @@ export const ImageContainer = styled('div', {
 
   img: {
     objectFit: 'cover',
+    alignSelf: 'center',
   },
 })

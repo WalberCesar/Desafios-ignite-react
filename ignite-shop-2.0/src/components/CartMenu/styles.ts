@@ -8,7 +8,7 @@ export const CartMenuContainer = styled(Dialog.Content, {
   justifyContent: 'space-between',
   padding: '3rem',
   alignItems: 'flex-start',
-  position: 'absolute',
+  position: 'fixed',
   backgroundColor: '$gray800',
   width: '30rem',
   minHeight: '100vh',

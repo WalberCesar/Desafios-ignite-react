@@ -4,7 +4,7 @@ export const TotalPriceContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  marginBottom: '3.4375rem',
+  marginBottom: '1rem',
 
   div: {
     display: 'flex',
